@@ -22,7 +22,7 @@ class App extends React.Component {
                 status: 'sell'
             }
         ],
-        pageTitle: 'Danya Loh',
+        pageTitle: 'I did not! Oh, Hi mark!!!',
         showCars: false,
     };
 
@@ -34,12 +34,12 @@ class App extends React.Component {
         })
     };
 
-    // handleInput = (event) => {
-    //     console.log('first input changed');
-    //     this.setState({
-    //         pageTitle: event.target.value
-    //     })
-    // };
+    handleInput = (event) => {
+        console.log('first input changed');
+        this.setState({
+            pageTitle: event.target.value
+        })
+    };
 
     toggleCars = () => {
         this.setState({
@@ -76,7 +76,24 @@ class App extends React.Component {
             color: 'blue'
         };
 
-        const cars = this.state.cars;
+        // const cars = this.state.cars;
+
+        let cars = null;
+
+        if (this.state.showCars) {
+            cars = this.state.cars.map((car, index) => {
+                return (
+                    <Car
+                        key={index}
+                        name={car.name}
+                        year={car.year}
+                        status={car.status}
+                        onDelete={this.deleteHandler.bind(this, index)}
+                        onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}
+                    />
+                )
+            })
+        }
 
         return (
             <div className='App' style={divClass}>
@@ -84,11 +101,11 @@ class App extends React.Component {
 
                 {/*<input type="text" onChange={this.handleInput}/>*/}
 
-                <button
-                    onClick={this.handleTitle.bind(this, 'Changed!!!')}
-                >
-                    Change title
-                </button>
+                {/*<button*/}
+                {/*    onClick={this.handleTitle.bind(this, 'Changed!!!')}*/}
+                {/*>*/}
+                {/*    Change title*/}
+                {/*</button>*/}
 
                 <button
                     onClick={this.toggleCars}
@@ -96,21 +113,28 @@ class App extends React.Component {
                     Show and unshow cars
                 </button>
 
-                {/*иттерируем каждый из элементов и возвращаем массив*/}
-                {this.state.showCars ?
-                    this.state.cars.map((car, index) => {
-                        return (
-                            <Car
-                                key={index}
-                                name={car.name}
-                                year={car.year}
-                                status={car.status}
-                                onDelete={this.deleteHandler.bind(this, index)}
-                                onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}
-                            />
-                        )
-                    }) : null}
-
+                <div style={{
+                    width: 600,
+                    margin: "auto",
+                    paddingTop: "20px"
+                }}>
+                    { cars }
+                    {/*ниже аналог того что пы прописал в render*/}
+                    {/*/!*иттерируем каждый из элементов и возвращаем массив*!/*/}
+                    {/*{this.state.showCars ?*/}
+                    {/*    this.state.cars.map((car, index) => {*/}
+                    {/*        return (*/}
+                    {/*            <Car*/}
+                    {/*                key={index}*/}
+                    {/*                name={car.name}*/}
+                    {/*                year={car.year}*/}
+                    {/*                status={car.status}*/}
+                    {/*                onDelete={this.deleteHandler.bind(this, index)}*/}
+                    {/*                onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}*/}
+                    {/*            />*/}
+                    {/*        )*/}
+                    {/*    }) : null}*/}
+                </div>
                 {/*<Car*/}
                 {/*    name={cars[0].name}*/}
                 {/*    year={cars[0].year}*/}
