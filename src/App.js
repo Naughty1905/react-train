@@ -1,30 +1,38 @@
 import React from 'react';
 // import './App.css';
-import Car from './Components/Car/Car'
+import Car from './Components/Car/Car';
+import ErrorBoundary from "./ErrorBoundary/Error";
+import Counter from './Components/Counter/Counter';
 
 class App extends React.Component {
 
-    state = {
-        cars: [
-            {
-                name: 'Ford Mustang',
-                year: '2009',
-                status: 'sell'
-            },
-            {
-                name: 'Audi A8',
-                year: '2020',
-                status: 'sell'
-            },
-            {
-                name: 'Mercedes CLS',
-                year: '2018',
-                status: 'sell'
-            }
-        ],
-        pageTitle: 'I did not! Oh, Hi mark!!!',
-        showCars: false,
-    };
+    constructor(props) {
+        console.log('App constructor');
+        super(props);
+        this.state = {
+            cars: [
+                {
+                    name: 'Ford Mustang',
+                    year: '2009',
+                    status: 'sell'
+                }
+                // ,
+                // {
+                //     name: 'Audi A8',
+                //     year: '2020',
+                //     status: 'sell'
+                // },
+                // {
+                //     name: 'Mercedes CLS',
+                //     year: '2018',
+                //     status: 'sell'
+                // }
+            ],
+            pageTitle: 'I did not! Oh, Hi mark!!!',
+            showCars: false,
+        };
+
+    }
 
     handleTitle = (newTitle) => {
         console.log('clicked');
@@ -64,16 +72,16 @@ class App extends React.Component {
         //like a [...this.state.cars]
         //create new array
         //cause concat is empty
-        let cars = this.state.cars.concat()
+        let cars = this.state.cars.concat();
         cars.splice(index, 1);
         this.setState({cars});
     }
 
-    render() {
 
+    render() {
         const divClass = {
             textAlign: 'center',
-            color: 'blue'
+            // color: 'blue'
         };
 
         // const cars = this.state.cars;
@@ -83,21 +91,26 @@ class App extends React.Component {
         if (this.state.showCars) {
             cars = this.state.cars.map((car, index) => {
                 return (
-                    <Car
-                        key={index}
-                        name={car.name}
-                        year={car.year}
-                        status={car.status}
-                        onDelete={this.deleteHandler.bind(this, index)}
-                        onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}
-                    />
+                    <ErrorBoundary key={index}>
+                        <Car
+                            name={car.name}
+                            year={car.year}
+                            status={car.status}
+                            onDelete={this.deleteHandler.bind(this, index)}
+                            onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}
+                        />
+                    </ErrorBoundary>
                 )
             })
         }
 
         return (
             <div className='App' style={divClass}>
-                <h1>{this.state.pageTitle}</h1>
+                {/*<h1>{this.state.pageTitle}</h1>*/}
+                <h1>{this.props.title}</h1>
+
+                <Counter />
+                <hr/>
 
                 {/*<input type="text" onChange={this.handleInput}/>*/}
 
@@ -108,6 +121,7 @@ class App extends React.Component {
                 {/*</button>*/}
 
                 <button
+                    style={{marginTop: "20px"}}
                     onClick={this.toggleCars}
                 >
                     Show and unshow cars
@@ -118,7 +132,7 @@ class App extends React.Component {
                     margin: "auto",
                     paddingTop: "20px"
                 }}>
-                    { cars }
+                    {cars}
                     {/*ниже аналог того что пы прописал в render*/}
                     {/*/!*иттерируем каждый из элементов и возвращаем массив*!/*/}
                     {/*{this.state.showCars ?*/}
