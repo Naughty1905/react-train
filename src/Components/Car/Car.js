@@ -1,6 +1,7 @@
 import React from 'react';
-import Radium from 'radium';
-import './Car.css';
+// import Radium from 'radium';
+import classes from './Car.css';
+import withClass from "../../hoc/withClass";
 
 class Car extends React.Component {
 
@@ -8,45 +9,45 @@ class Car extends React.Component {
     //     super(props);
     // }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log('car componentWillReceiveProps', nextProps);
-    }
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log('car shouldComponentUpdate', nextProps, nextState);
-        return nextProps.name.trim() !== this.props.name.trim();
-    }
-
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('car componentWillUpdate', nextProps, nextState);
-    }
-
-    //функция жизненного цикла, такая же как и componentWillUpdate,
-    //но в ней нельзя менять state
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     console.log('car getDerivedStateFromProps', nextProps, prevState);
-    //     return prevState;
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     console.log('car componentWillReceiveProps', nextProps);
     // }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('car componentDidUpdate');
-    }
-
-    // static getSnapshotBeforeUpdate(prevProps, prevState) {
-    //     console.log('car getSnapshotBeforeUpdate');
+    //
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     console.log('car shouldComponentUpdate', nextProps, nextState);
+    //     return nextProps.name.trim() !== this.props.name.trim();
     // }
-
-    componentWillMount() {
-        console.log('car componentWillMount');
-    }
-
-    componentDidMount() {
-        console.log('car componentDidMount')
-    }
-
-    componentWillUnmount() {
-        console.log('car componentWillUnmount')
-    }
+    //
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    //     console.log('car componentWillUpdate', nextProps, nextState);
+    // }
+    //
+    // //функция жизненного цикла, такая же как и componentWillUpdate,
+    // //но в ней нельзя менять state
+    // // static getDerivedStateFromProps(nextProps, prevState) {
+    // //     console.log('car getDerivedStateFromProps', nextProps, prevState);
+    // //     return prevState;
+    // // }
+    //
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log('car componentDidUpdate');
+    // }
+    //
+    // // static getSnapshotBeforeUpdate(prevProps, prevState) {
+    // //     console.log('car getSnapshotBeforeUpdate');
+    // // }
+    //
+    // componentWillMount() {
+    //     console.log('car componentWillMount');
+    // }
+    //
+    // componentDidMount() {
+    //     console.log('car componentDidMount')
+    // }
+    //
+    // componentWillUnmount() {
+    //     console.log('car componentWillUnmount')
+    // }
 
 
     render() {
@@ -69,19 +70,19 @@ class Car extends React.Component {
             inputClasses.push('bold');
         }
 
-        const style = {
-            border: '2px solid #ccc',
-            boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.14)',
-            cursor: 'pointer',
-            //заюзал тут псевдоселектор благодаря пакету radium
-            ':hover': {
-                border: '1px solid #aaa',
-                boxShadow: '0 4px 15px 0 rgba(0, 0, 0, .3)'
-            }
-        }
+        // const style = {
+        //     border: '2px solid #ccc',
+        //     boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.14)',
+        //     cursor: 'pointer',
+        //     //заюзал тут псевдоселектор благодаря пакету radium
+        //     ':hover': {
+        //         border: '1px solid #aaa',
+        //         boxShadow: '0 4px 15px 0 rgba(0, 0, 0, .3)'
+        //     }
+        // };
 
         return (
-            <div className="Car" style={style}>
+            <React.Fragment>
                 <h3>Car name: {this.props.name}</h3>
                 <p>Year: <strong>{this.props.year}</strong></p>
                 <p>Status: <strong>{this.props.status}</strong></p>
@@ -92,10 +93,13 @@ class Car extends React.Component {
                     className={inputClasses.join(' ')}
                 />
                 <button onClick={this.props.onDelete}>Delete</button>
-            </div>
+            </React.Fragment>
         )
     }
 }
+
+export default withClass(Car, classes.Car);
+
 
 // const Car = (props) => {
 //     const inputClasses = ['input'];
@@ -138,7 +142,6 @@ class Car extends React.Component {
 // }
 
 // export default Radium(Car);
-export default Car;
 
 
 /**

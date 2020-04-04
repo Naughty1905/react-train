@@ -109,7 +109,7 @@ class App extends React.Component {
                 {/*<h1>{this.state.pageTitle}</h1>*/}
                 <h1>{this.props.title}</h1>
 
-                <Counter />
+                <Counter/>
                 <hr/>
 
                 {/*<input type="text" onChange={this.handleInput}/>*/}
