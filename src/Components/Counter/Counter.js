@@ -1,5 +1,6 @@
 import React from "react";
 import Auxillary from "../../hoc/Auxillary";
+import CounterTwo from '../CounterTwo/CounterTwo';
 
 export default class Counter extends React.Component {
 
@@ -33,6 +34,7 @@ export default class Counter extends React.Component {
             // <React.Fragment>
             <Auxillary>
                 <h2>Counter: {this.state.counter}</h2>
+                <CounterTwo/>
                 <button
                     style={{marginRight: "10px"}}
                     onClick={() => this.setState({counter: this.state.counter - 1})}

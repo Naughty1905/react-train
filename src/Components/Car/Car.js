@@ -1,7 +1,7 @@
 import React from 'react';
 // import Radium from 'radium';
 import PropTypes from 'prop-types';
-import './Car.css';
+import classes from './Car.module.css';
 import withClass from "../../hoc/withClass";
 
 class Car extends React.Component {
@@ -93,7 +93,7 @@ class Car extends React.Component {
         // };
 
 
-        // console.log(classes);
+        console.log(classes);
 
         return (
             <React.Fragment>
@@ -123,7 +123,7 @@ Car.propTypes = {
     onDelete: PropTypes.func,
 }
 
-export default withClass(Car, `Car`);
+export default withClass(Car, classes.Car);
 
 
 // const Car = (props) => {
