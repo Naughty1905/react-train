@@ -1,9 +1,9 @@
 import React from "react";
 
-const withClass = (Component, className) => {
+const withClass = (Component, name) => {
     return (props) => {
         return (
-            <div className={className}>
+            <div className={name}>
                 <Component {...props}/>
             </div>
         )

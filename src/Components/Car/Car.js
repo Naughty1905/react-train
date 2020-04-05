@@ -1,6 +1,7 @@
 import React from 'react';
 // import Radium from 'radium';
-import classes from './Car.css';
+import PropTypes from 'prop-types';
+import './Car.css';
 import withClass from "../../hoc/withClass";
 
 class Car extends React.Component {
@@ -48,7 +49,17 @@ class Car extends React.Component {
     // componentWillUnmount() {
     //     console.log('car componentWillUnmount')
     // }
+    constructor(props) {
+        super(props);
+        this.inputRef = React.createRef();
+    }
 
+    //когда компонент зарендерился
+    componentDidMount() {
+        if (this.props.index === 0) {
+            this.inputRef.current.focus();
+        }
+    };
 
     render() {
         console.log('car render');
@@ -81,12 +92,17 @@ class Car extends React.Component {
         //     }
         // };
 
+
+        // console.log(classes);
+
         return (
             <React.Fragment>
                 <h3>Car name: {this.props.name}</h3>
                 <p>Year: <strong>{this.props.year}</strong></p>
                 <p>Status: <strong>{this.props.status}</strong></p>
                 <input
+                    // ref={(inputRef) => this.inputRef = inputRef}
+                    ref={this.inputRef}
                     type="text"
                     onChange={this.props.onChangeName}
                     value={this.props.name}
@@ -98,7 +114,16 @@ class Car extends React.Component {
     }
 }
 
-export default withClass(Car, classes.Car);
+Car.propTypes = {
+    name: PropTypes.string.isRequired,
+    year: PropTypes.number,
+    status: PropTypes.string,
+    index: PropTypes.number,
+    onChangeName: PropTypes.func,
+    onDelete: PropTypes.func,
+}
+
+export default withClass(Car, `Car`);
 
 
 // const Car = (props) => {

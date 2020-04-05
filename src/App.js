@@ -13,20 +13,19 @@ class App extends React.Component {
             cars: [
                 {
                     name: 'Ford Mustang',
-                    year: '2009',
+                    year: 2009,
+                    status: 'sell'
+                },
+                {
+                    name: 'Audi A8',
+                    year: 2020,
+                    status: 'sell'
+                },
+                {
+                    name: 'Mercedes CLS',
+                    year: 2018,
                     status: 'sell'
                 }
-                // ,
-                // {
-                //     name: 'Audi A8',
-                //     year: '2020',
-                //     status: 'sell'
-                // },
-                // {
-                //     name: 'Mercedes CLS',
-                //     year: '2018',
-                //     status: 'sell'
-                // }
             ],
             pageTitle: 'I did not! Oh, Hi mark!!!',
             showCars: false,
@@ -96,6 +95,7 @@ class App extends React.Component {
                             name={car.name}
                             year={car.year}
                             status={car.status}
+                            index={index}
                             onDelete={this.deleteHandler.bind(this, index)}
                             onChangeName={(event) => this.onChangeName(`${event.target.value}`, index)}
                         />
